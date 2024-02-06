@@ -69,7 +69,7 @@ export function FunctionalApp(props: FunctionalDogsProps) {
       });
   };
 
-  const handleHeartClick = async (id: number, isFavorite: boolean) => {
+  const handleHeartClick = (id: number, isFavorite: boolean) => {
     setIsLoading(true);
     return Requests.updateDog({
       id: id,

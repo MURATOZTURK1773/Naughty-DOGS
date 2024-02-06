@@ -24,12 +24,10 @@ export const FunctionalSection: React.FC<FunctionalSectionProps> = (
   props: FunctionalSectionProps
 ) => {
   const handleHeartClick = (id: number, isFavorite: boolean) => {
-    console.log("Heart clicked! Dog ID:", id, "Is Favorite:", isFavorite);
     props.onHeartClick(id, isFavorite);
   };
 
   const handleEmptyHeartClick = (id: number, isFavorite: boolean) => {
-    console.log("Empty heart clicked! Dog ID:", id, "Is Favorite:", isFavorite);
     props.onEmptyHeartClick(id, isFavorite);
   };
 

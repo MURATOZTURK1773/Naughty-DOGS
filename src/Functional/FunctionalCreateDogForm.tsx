@@ -35,7 +35,7 @@ export const FunctionalCreateDogForm = ({
         setDescription("");
         setSelectedImage(defaultSelectedImage);
         setIsFormSubmitted(false);
-        toast.success("Created a new dog!!!");
+        toast.success(`Created ${newDog.name} !!!`);
       })
       .catch((error) => {
         toast.error("Error creating dog:", error);
