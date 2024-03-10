@@ -18,84 +18,84 @@
       "name": "Thurman",
       "image": "/assets/boxer.png",
       "description": "subtle though jade indeed before island aha",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 2
     },
     {
       "name": "Lucie",
       "image": "/assets/dalmation.png",
       "description": "psst justly browsing all solid",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 4
     },
     {
       "name": "Luella",
       "image": "/assets/blue-heeler.png",
       "description": "smoothly idolized naturally yum that till phew",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 5
     },
     {
       "name": "Shannon",
       "image": "/assets/cowardly.png",
       "description": "invite insistent brr truthfully athwart bah straddle assassination",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 6
     },
     {
       "name": "Imani",
       "image": "/assets/dalmation.png",
       "description": "rattle excluding skean on recovery",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 7
     },
     {
       "name": "Danyka",
       "image": "/assets/chihuahua.avif",
       "description": "chillax daily sally however lest",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 8
     },
     {
       "name": "Toby",
       "image": "/assets/blue-heeler.png",
       "description": "wildly forenenst rightfully till how",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 9
     },
     {
       "name": "Tyson",
       "image": "/assets/blue-heeler.png",
       "description": "inequality maroon however nimble segregate",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 10
     },
     {
       "name": "Eulalia",
       "image": "/assets/boxer.png",
       "description": "foolish rarely despite fooey frantically definitive jubilant dislike",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 11
     },
     {
       "name": "Lawson",
       "image": "/assets/cowardly.png",
       "description": "uniform but wet cruelly knowledgeable",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 12
     },
     {
       "name": "Cooper",
       "image": "/assets/dalmation.png",
       "description": "furthermore when righteously when handlebar breathe considering so",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 13
     },
     {
       "name": "Melody",
       "image": "/assets/chihuahua.avif",
       "description": "demotivate above hmph exploit hatbox quaver these",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 14
     },
     {
@@ -109,35 +109,35 @@
       "name": "Dakota",
       "image": "/assets/chihuahua.avif",
       "description": "salad hopelessly loyally gah whoever",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 16
     },
     {
       "name": "Stewart",
       "image": "/assets/blue-heeler.png",
       "description": "bad whoever obedient modulo investigation daily yum",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 17
     },
     {
       "name": "Melyssa",
       "image": "/assets/cowardly.png",
       "description": "drat considering youthfully unfortunately whereas aside underline jealously",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 18
     },
     {
       "name": "Korey",
       "image": "/assets/chihuahua.avif",
       "description": "loosely at bossy surprisingly friendly for well-lit seldom",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 19
     },
     {
       "name": "bandit",
       "image": "/assets/dalmation.png",
       "description": "naughty dog",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 20
     },
     {
@@ -195,13 +195,6 @@
       "description": "AAAAAAAAA",
       "isFavorite": false,
       "id": 30
-    },
-    {
-      "name": "AAAAAA",
-      "image": "/assets/corgi.png",
-      "description": "AAAAAAAAAAAAAAAAA",
-      "isFavorite": false,
-      "id": 31
     }
   ]
 }

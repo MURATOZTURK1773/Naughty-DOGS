@@ -1,41 +1,26 @@
 import { useEffect, useState } from "react";
 import { FunctionalSection } from "./FunctionalSection";
-import { Dog } from "../types";
+import { ActiveTab, Dog } from "../types";
 import { Requests } from "../api";
-import { FunctionalDogsProps } from "./FunctionalDogs";
+import { FunctionalDogs } from "./FunctionalDogs";
 
-export function FunctionalApp(props: FunctionalDogsProps) {
+export function FunctionalApp() {
   const [allDogs, setAllDogs] = useState<Dog[]>([]);
-  const [favoritedDogs, setFavoritedDog] = useState<Dog[]>([]);
-  const [unfavoritedDogs, setUnFavoritedDog] = useState<Dog[]>([]);
-  const [activeTab, setActiveTab] = useState("");
+  const [activeTab, setActiveTab] = useState<ActiveTab>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoading(true);
-    refetchData()
-      .then(() => {
-        setFavoritedDog(allDogs.filter((dog) => dog.isFavorite === true));
-        setUnFavoritedDog(allDogs.filter((dog) => dog.isFavorite === false));
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    refetchData().finally(() => {
+      setIsLoading(false);
+    });
   }, []);
 
   const refetchData = () => {
     setIsLoading(true);
     return Requests.getAllDogs()
       .then((dogs) => {
-        setAllDogs(() => {
-          const favoritedDogs = dogs.filter((dog) => dog.isFavorite === true);
-          const unfavoritedDogs = dogs.filter(
-            (dog) => dog.isFavorite === false
-          );
-          setFavoritedDog(favoritedDogs);
-          setUnFavoritedDog(unfavoritedDogs);
-          return dogs;
-        });
+        setAllDogs(dogs);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -94,38 +79,41 @@ export function FunctionalApp(props: FunctionalDogsProps) {
   const favoritedDogsCount = allDogs.filter((dog) => dog.isFavorite).length;
   const unfavoritedDogsCount = allDogs.filter((dog) => !dog.isFavorite).length;
 
-  const renderFunctionalSectionComponent = (dogs: Dog[], tab: string) => {
-    return (
-      <FunctionalSection
-        dogs={dogs}
-        updateDog={updateDog}
-        deleteDog={deleteDog}
-        onEmptyHeartClick={handleHeartClick}
-        onHeartClick={handleHeartClick}
-        createDog={createDog}
-        isLoading={isLoading}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        favoritedCount={favoritedDogsCount}
-        unfavoritedCount={unfavoritedDogsCount}
-      >
-        {props.children}
-      </FunctionalSection>
-    );
-  };
+  let filteredDogs = allDogs.filter((dog) => {
+    if (activeTab === "create dog") return false;
+    if (activeTab === "favorited") return dog.isFavorite;
+    if (activeTab === "unfavorited") return !dog.isFavorite;
+    if (activeTab === "") return true;
+  });
 
   return (
     <div className="App" style={{ backgroundColor: "skyblue" }}>
       <header>
         <h1>pup-e-picker (Functional)</h1>
       </header>
-      {activeTab === "favorited" &&
-        renderFunctionalSectionComponent(favoritedDogs, activeTab)}
-      {activeTab === "unfavorited" &&
-        renderFunctionalSectionComponent(unfavoritedDogs, activeTab)}
-      {activeTab !== "favorited" &&
-        activeTab !== "unfavorited" &&
-        renderFunctionalSectionComponent(allDogs, activeTab)}
+      <FunctionalSection
+        activeTab={activeTab}
+        isLoading={isLoading}
+        favoritedCount={favoritedDogsCount}
+        unfavoritedCount={unfavoritedDogsCount}
+        setActiveTab={setActiveTab}
+        dogs={filteredDogs}
+        createDog={createDog}
+        updateDog={updateDog}
+        deleteDog={deleteDog}
+        onEmptyHeartClick={handleHeartClick}
+        onHeartClick={handleHeartClick}
+      >
+        <FunctionalDogs
+          dogs={filteredDogs}
+          updateDog={updateDog}
+          deleteDog={deleteDog}
+          onEmptyHeartClick={handleHeartClick}
+          onHeartClick={handleHeartClick}
+          isLoading={isLoading}
+          children
+        />
+      </FunctionalSection>
     </div>
   );
 }

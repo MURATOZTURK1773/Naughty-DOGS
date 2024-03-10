@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { FunctionalDogs } from "./FunctionalDogs";
-import { Dog } from "../types";
+import { ActiveTab, Dog } from "../types";
 import { FunctionalCreateDogForm } from "./FunctionalCreateDogForm";
 import { SectionLayout } from "../Layouts/SectionalLayout";
 
 interface FunctionalSectionProps {
   activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+  setActiveTab: React.Dispatch<React.SetStateAction<ActiveTab>>;
   children: ReactNode;
   dogs: Dog[];
   updateDog: (dog: Dog) => void;
@@ -32,16 +32,20 @@ export const FunctionalSection: React.FC<FunctionalSectionProps> = (
   };
 
   const handleTabClick = (tab: string) => {
-    props.setActiveTab((prevTab) => (prevTab === tab ? "" : tab));
-    switch (tab) {
-      case "favorited":
-        break;
-      case "unfavorited":
-        break;
-      case "create dog":
-        break;
-      default:
-        break;
+    if (["", "favorited", "unfavorited", "create dog"].includes(tab)) {
+      props.setActiveTab((prevTab) =>
+        prevTab === (tab as ActiveTab) ? "" : (tab as ActiveTab)
+      );
+      switch (tab) {
+        case "favorited":
+          break;
+        case "unfavorited":
+          break;
+        case "create dog":
+          break;
+        default:
+          break;
+      }
     }
   };
 

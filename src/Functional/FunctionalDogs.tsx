@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import { DogCard } from "../Shared/DogCard";
-import { dogPictures } from "../dog-pictures";
 import { Dog } from "../types";
 
 export interface FunctionalDogsProps {

@@ -1,4 +1,3 @@
-// Add your own custom types in here
 export type Dog = {
   id: number;
   image: string;
@@ -6,3 +5,5 @@ export type Dog = {
   isFavorite: boolean;
   name: string;
 };
+
+export type ActiveTab = "" | "favorited" | "unfavorited" | "create dog";
