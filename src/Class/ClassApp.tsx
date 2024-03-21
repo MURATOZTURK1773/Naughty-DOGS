@@ -8,16 +8,22 @@ export interface ClassComponentState {
   allDogs: Dog[];
   activeTab: ActiveTab;
   isLoading: boolean;
+  setActiveTab: (tab: ActiveTab) => void;
 }
 
 export class ClassApp extends Component<
   Record<string, never>,
   ClassComponentState
 > {
+  setActiveTab = (tab: ActiveTab) => {
+    this.setState({ activeTab: tab });
+  };
+
   state: ClassComponentState = {
     allDogs: [],
     activeTab: "none-selected",
     isLoading: false,
+    setActiveTab: this.setActiveTab,
   };
 
   componentDidMount(): void {
@@ -102,7 +108,7 @@ export class ClassApp extends Component<
         </header>
         <ClassSection
           activeTab={activeTab}
-          setActiveTab={this.props.setActiveTab}
+          setActiveTab={this.state.setActiveTab}
           isLoading={this.state.isLoading}
           favoritedCount={favoritedDogsCount}
           unfavoritedCount={unfavoritedDogsCount}
