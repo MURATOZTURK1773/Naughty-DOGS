@@ -18,21 +18,21 @@
       "name": "Thurman",
       "image": "/assets/boxer.png",
       "description": "subtle though jade indeed before island aha",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 2
     },
     {
       "name": "Lucie",
       "image": "/assets/dalmation.png",
       "description": "psst justly browsing all solid",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 4
     },
     {
       "name": "Luella",
       "image": "/assets/blue-heeler.png",
       "description": "smoothly idolized naturally yum that till phew",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 5
     },
     {
@@ -102,7 +102,7 @@
       "name": "Linda",
       "image": "/assets/blue-heeler.png",
       "description": "instead angelic kissingly easily apropos tempting crease",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 15
     },
     {
@@ -144,21 +144,21 @@
       "name": "deran",
       "image": "/assets/chihuahua.avif",
       "description": "deran is a just a NAUGHTY GIRL.",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 22
     },
     {
       "name": "craig",
       "image": "/assets/chihuahua.avif",
       "description": "what is your problem?",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 23
     },
     {
       "name": "dawg",
       "image": "/assets/boxer.jpeg",
       "description": "asadasdasda",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 25
     },
     {
@@ -172,7 +172,7 @@
       "name": "rdg",
       "image": "/assets/blue-heeler.png",
       "description": "dgdfdfg",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 27
     },
     {
@@ -183,17 +183,17 @@
       "id": 28
     },
     {
-      "name": "asdas",
+      "name": "kopek",
       "image": "/assets/blue-heeler.png",
-      "description": "dasdasd",
+      "description": "ASDa",
       "isFavorite": false,
       "id": 29
     },
     {
-      "name": "aaaaaa",
-      "image": "/assets/dalmation.png",
-      "description": "AAAAAAAAA",
-      "isFavorite": false,
+      "name": "MURAT the Dawg",
+      "image": "/assets/corgi.png",
+      "description": "Angry dog at Jon, Just kidding man i thank you i learned quite a bit 🤣",
+      "isFavorite": true,
       "id": 30
     }
   ]

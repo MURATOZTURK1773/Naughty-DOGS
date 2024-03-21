@@ -6,4 +6,8 @@ export type Dog = {
   name: string;
 };
 
-export type ActiveTab = "" | "favorited" | "unfavorited" | "create dog";
+export type ActiveTab =
+  | "none-selected"
+  | "favorited"
+  | "unfavorited"
+  | "create dog";

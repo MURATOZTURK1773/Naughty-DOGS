@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { DogCard } from "../Shared/DogCard";
 import { Dog } from "../types";
 
@@ -9,7 +9,6 @@ export interface FunctionalDogsProps {
   onHeartClick: (id: number, isFavorite: boolean) => void;
   onEmptyHeartClick: (id: number, isFavorite: boolean) => void;
   isLoading: boolean;
-  children: ReactNode;
 }
 
 export const FunctionalDogs: React.FC<FunctionalDogsProps> = (
@@ -24,9 +23,15 @@ export const FunctionalDogs: React.FC<FunctionalDogsProps> = (
               <DogCard
                 key={dog.id}
                 dog={dog}
-                onTrashIconClick={() => props.deleteDog(dog.id)}
-                onHeartClick={() => props.onHeartClick(dog.id, !dog.isFavorite)}
+                onTrashIconClick={() =>
+                  props.deleteDog && props.deleteDog(dog.id)
+                }
+                onHeartClick={() =>
+                  props.onHeartClick &&
+                  props.onHeartClick(dog.id, !dog.isFavorite)
+                }
                 onEmptyHeartClick={() =>
+                  props.onEmptyHeartClick &&
                   props.onEmptyHeartClick(dog.id, !dog.isFavorite)
                 }
                 isLoading={props.isLoading}

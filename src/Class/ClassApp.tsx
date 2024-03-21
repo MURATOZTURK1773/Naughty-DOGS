@@ -1,12 +1,12 @@
 import { Component } from "react";
-import { ClassSection } from "./ClassSection";
-import { Dog } from "../types";
+import { ActiveTab, Dog } from "../types";
 import { Requests } from "../api";
 import { ClassDogs } from "./ClassDogs";
+import { ClassSection } from "./ClassSection";
 
 export interface ClassComponentState {
   allDogs: Dog[];
-  activeTab: string;
+  activeTab: ActiveTab;
   isLoading: boolean;
 }
 
@@ -16,15 +16,12 @@ export class ClassApp extends Component<
 > {
   state: ClassComponentState = {
     allDogs: [],
-    activeTab: "",
+    activeTab: "none-selected",
     isLoading: false,
   };
 
   componentDidMount(): void {
-    this.setState({ isLoading: true });
-    this.refetchData().finally(() => {
-      this.setState({ isLoading: false });
-    });
+    this.refetchData();
   }
 
   refetchData = () => {
@@ -50,22 +47,12 @@ export class ClassApp extends Component<
       id: dog.id,
       isFavorite: dog.isFavorite,
     })
-      .then(() => {
-        this.setState((prevDogs) => {
-          return {
-            ...prevDogs,
-            allDogs: prevDogs.allDogs.map((prevDog) => {
-              if (prevDog.id === dog.id) {
-                return { ...prevDog, isFavorite: dog.isFavorite ?? false };
-              }
-              return prevDog;
-            }),
-          };
-        });
-      })
+      .then(() => this.refetchData())
       .catch((error) => {
-        this.setState({ isLoading: false });
         console.error("Error updating dog:", error);
+      })
+      .finally(() => {
+        this.setState({ isLoading: false });
       });
   };
 
@@ -105,7 +92,7 @@ export class ClassApp extends Component<
       if (activeTab === "create dog") return false;
       if (activeTab === "favorited") return dog.isFavorite;
       if (activeTab === "unfavorited") return !dog.isFavorite;
-      if (activeTab === "") return true;
+      if (activeTab === "none-selected") return true;
     });
 
     return (
@@ -115,15 +102,11 @@ export class ClassApp extends Component<
         </header>
         <ClassSection
           activeTab={activeTab}
-          dogs={filteredDogs}
+          setActiveTab={this.props.setActiveTab}
           isLoading={this.state.isLoading}
           favoritedCount={favoritedDogsCount}
           unfavoritedCount={unfavoritedDogsCount}
-          updateDog={this.updateDog}
-          deleteDog={this.deleteDog}
           createDog={this.createDog}
-          onEmptyHeartClick={this.handleHeartClick}
-          onHeartClick={this.handleHeartClick}
         >
           <ClassDogs
             dogs={filteredDogs}
@@ -132,7 +115,6 @@ export class ClassApp extends Component<
             onEmptyHeartClick={this.handleHeartClick}
             onHeartClick={this.handleHeartClick}
             isLoading={this.state.isLoading}
-            children
           />
         </ClassSection>
       </div>

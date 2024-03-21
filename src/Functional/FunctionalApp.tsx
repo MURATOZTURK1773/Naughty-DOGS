@@ -6,14 +6,11 @@ import { FunctionalDogs } from "./FunctionalDogs";
 
 export function FunctionalApp() {
   const [allDogs, setAllDogs] = useState<Dog[]>([]);
-  const [activeTab, setActiveTab] = useState<ActiveTab>("");
+  const [activeTab, setActiveTab] = useState<ActiveTab>("none-selected");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    refetchData().finally(() => {
-      setIsLoading(false);
-    });
+    refetchData();
   }, []);
 
   const refetchData = () => {
@@ -25,7 +22,6 @@ export function FunctionalApp() {
       .catch((error) => {
         setIsLoading(false);
         console.error("Error fetching data:", error);
-        throw error;
       })
       .finally(() => {
         setIsLoading(false);
@@ -38,20 +34,11 @@ export function FunctionalApp() {
       id: dog.id,
       isFavorite: dog.isFavorite,
     })
-      .then(() => {
-        setAllDogs((prevDogs: Dog[]) => {
-          return prevDogs.map((prevDog) => {
-            if (prevDog.id === dog.id) {
-              return { ...prevDog, isFavorite: dog.isFavorite ?? false };
-            }
-            return prevDog;
-          });
-        });
-      })
+      .then(() => refetchData())
       .catch((error) => {
-        setIsLoading(false);
         console.error("Error updating dog:", error);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleHeartClick = (id: number, isFavorite: boolean) => {
@@ -68,12 +55,12 @@ export function FunctionalApp() {
       });
   };
 
-  const createDog = (dog: Omit<Dog, "id">) => {
-    return Requests.postDog(dog).then(refetchData);
-  };
-
   const deleteDog = (id: number) => {
     return Requests.deleteDog(id).then(refetchData);
+  };
+
+  const createDog = (dog: Omit<Dog, "id">) => {
+    return Requests.postDog(dog).then(refetchData);
   };
 
   const favoritedDogsCount = allDogs.filter((dog) => dog.isFavorite).length;
@@ -83,7 +70,7 @@ export function FunctionalApp() {
     if (activeTab === "create dog") return false;
     if (activeTab === "favorited") return dog.isFavorite;
     if (activeTab === "unfavorited") return !dog.isFavorite;
-    if (activeTab === "") return true;
+    if (activeTab === "none-selected") return true;
   });
 
   return (
@@ -97,12 +84,7 @@ export function FunctionalApp() {
         favoritedCount={favoritedDogsCount}
         unfavoritedCount={unfavoritedDogsCount}
         setActiveTab={setActiveTab}
-        dogs={filteredDogs}
         createDog={createDog}
-        updateDog={updateDog}
-        deleteDog={deleteDog}
-        onEmptyHeartClick={handleHeartClick}
-        onHeartClick={handleHeartClick}
       >
         <FunctionalDogs
           dogs={filteredDogs}
@@ -111,7 +93,6 @@ export function FunctionalApp() {
           onEmptyHeartClick={handleHeartClick}
           onHeartClick={handleHeartClick}
           isLoading={isLoading}
-          children
         />
       </FunctionalSection>
     </div>
