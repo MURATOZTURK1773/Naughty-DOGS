@@ -8,7 +8,7 @@ import { ActiveTab } from "../types";
 interface ClassSectionProps {
   activeTab: ActiveTab;
   setActiveTab: (tab: ActiveTab) => void;
-  children?: React.ReactNode;
+  children: React.ReactNode;
   isLoading: boolean;
   favoritedCount: number;
   unfavoritedCount: number;
@@ -62,10 +62,13 @@ export class ClassSection extends Component<ClassSectionProps> {
         </div>
         <div className="content-container">
           <div>
-            <SectionLayout>{children}</SectionLayout>
-            {activeTab === "create dog" && (
-              <ClassCreateDogForm createDog={createDog} />
-            )}
+            <SectionLayout>
+              {activeTab === "create dog" ? (
+                <ClassCreateDogForm createDog={createDog} />
+              ) : (
+                children
+              )}
+            </SectionLayout>
           </div>
         </div>
       </section>

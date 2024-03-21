@@ -64,10 +64,13 @@ export const FunctionalSection: React.FC<FunctionalSectionProps> = (
 
       <div className="content-container">
         <div>
-          <SectionLayout>{props.children}</SectionLayout>
-          {props.activeTab === "create dog" && (
-            <FunctionalCreateDogForm createDog={props.createDog} />
-          )}
+          <SectionLayout>
+            {props.activeTab === "create dog" ? (
+              <FunctionalCreateDogForm createDog={props.createDog} />
+            ) : (
+              props.children
+            )}
+          </SectionLayout>
         </div>
       </div>
     </section>
