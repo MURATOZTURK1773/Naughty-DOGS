@@ -1,8 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ActiveTab, Dog } from "../types";
-import { FunctionalCreateDogForm } from "./FunctionalCreateDogForm";
-import { SectionLayout } from "../Layouts/SectionalLayout";
 import React from "react";
 
 interface FunctionalSectionProps {
@@ -15,22 +13,43 @@ interface FunctionalSectionProps {
   createDog: (dog: Omit<Dog, "id">) => Promise<void>;
 }
 
+const Tab = ({
+  tab,
+  isActive,
+  handleTabClick,
+  favoritedCount,
+  unfavoritedCount,
+}: {
+  tab: ActiveTab;
+  isActive: boolean;
+  handleTabClick: (input: ActiveTab) => void;
+  favoritedCount: number;
+  unfavoritedCount: number;
+}) => {
+  const text = tab
+    .split("")
+    .map((c, i) => (i === 0 ? c.toUpperCase() : c.toLowerCase()))
+    .join("");
+
+  return (
+    <div
+      className={`selector ${isActive ? "active" : ""}`}
+      onClick={() => handleTabClick(tab as ActiveTab)}
+    >
+      {text}
+      {tab === "favorited" && `(${favoritedCount})`}
+      {tab === "unfavorited" && `(${unfavoritedCount})`}
+    </div>
+  );
+};
+
 export const FunctionalSection: React.FC<FunctionalSectionProps> = (
   props: FunctionalSectionProps
 ) => {
   const handleTabClick = (tab: ActiveTab) => {
-    const validChoices = [
-      "none-selected",
-      "favorited",
-      "unfavorited",
-      "create dog",
-    ] as ActiveTab[];
-
-    if (validChoices.includes(tab)) {
-      props.setActiveTab((currentTab) =>
-        currentTab === tab ? "none-selected" : tab
-      );
-    }
+    props.setActiveTab((currentTab) =>
+      currentTab === tab ? "none-selected" : tab
+    );
   };
 
   return (
@@ -41,37 +60,20 @@ export const FunctionalSection: React.FC<FunctionalSectionProps> = (
           Change to Class
         </Link>
         <div className="selectors">
-          {["favorited", "unfavorited", "create dog"].map((tab) => (
-            <div
-              key={tab}
-              className={`selector ${props.activeTab === tab ? "active" : ""}`}
-              onClick={() => handleTabClick(tab as ActiveTab)}
-            >
-              {tab === "favorited"
-                ? "favorited"
-                : tab === "unfavorited"
-                ? "unfavorited"
-                : "create dog"}{" "}
-              {tab === "favorited"
-                ? props.favoritedCount
-                : tab === "unfavorited"
-                ? props.unfavoritedCount
-                : ""}
-            </div>
+          {(["favorited", "unfavorited", "create dog"] as const).map((tab) => (
+            <Tab
+              isActive={tab === props.activeTab}
+              handleTabClick={handleTabClick}
+              tab={tab}
+              favoritedCount={props.favoritedCount}
+              unfavoritedCount={props.unfavoritedCount}
+            />
           ))}
         </div>
       </div>
 
       <div className="content-container">
-        <div>
-          <SectionLayout>
-            {props.activeTab === "create dog" ? (
-              <FunctionalCreateDogForm createDog={props.createDog} />
-            ) : (
-              props.children
-            )}
-          </SectionLayout>
-        </div>
+        <div>{props.children}</div>
       </div>
     </section>
   );

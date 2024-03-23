@@ -116,7 +116,6 @@ body {
 #main-section {
   border: 2px solid black;
   background-color: black;
-  width: 80%;
   height: 90%;
   display: flex;
   flex: 12;

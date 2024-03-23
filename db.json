@@ -32,7 +32,7 @@
       "name": "Luella",
       "image": "/assets/blue-heeler.png",
       "description": "smoothly idolized naturally yum that till phew",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 5
     },
     {
@@ -60,7 +60,7 @@
       "name": "Toby",
       "image": "/assets/blue-heeler.png",
       "description": "wildly forenenst rightfully till how",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 9
     },
     {
@@ -195,6 +195,13 @@
       "description": "Angry dog at Jon, Just kidding man i thank you i learned quite a bit 🤣",
       "isFavorite": true,
       "id": 30
+    },
+    {
+      "name": "jon krasinski",
+      "image": "/assets/boxer.jpeg",
+      "description": "jack ryan",
+      "isFavorite": false,
+      "id": 31
     }
   ]
 }

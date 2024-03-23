@@ -3,6 +3,7 @@ import { FunctionalSection } from "./FunctionalSection";
 import { ActiveTab, Dog } from "../types";
 import { Requests } from "../api";
 import { FunctionalDogs } from "./FunctionalDogs";
+import { FunctionalCreateDogForm } from "./FunctionalCreateDogForm";
 
 export function FunctionalApp() {
   const [allDogs, setAllDogs] = useState<Dog[]>([]);
@@ -86,14 +87,19 @@ export function FunctionalApp() {
         setActiveTab={setActiveTab}
         createDog={createDog}
       >
-        <FunctionalDogs
-          dogs={filteredDogs}
-          updateDog={updateDog}
-          deleteDog={deleteDog}
-          onEmptyHeartClick={handleHeartClick}
-          onHeartClick={handleHeartClick}
-          isLoading={isLoading}
-        />
+        {activeTab !== "create dog" && (
+          <FunctionalDogs
+            dogs={filteredDogs}
+            updateDog={updateDog}
+            deleteDog={deleteDog}
+            onEmptyHeartClick={handleHeartClick}
+            onHeartClick={handleHeartClick}
+            isLoading={isLoading}
+          />
+        )}
+        {activeTab === "create dog" && (
+          <FunctionalCreateDogForm createDog={createDog} />
+        )}
       </FunctionalSection>
     </div>
   );

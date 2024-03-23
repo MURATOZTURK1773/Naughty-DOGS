@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Dog } from "../types";
-import { ClassCreateDogForm } from "./ClassCreateDogForm";
-import { SectionLayout } from "../Layouts/SectionalLayout";
 import { ActiveTab } from "../types";
 
 interface ClassSectionProps {
@@ -17,18 +15,41 @@ interface ClassSectionProps {
 
 export class ClassSection extends Component<ClassSectionProps> {
   handleTabClick = (tab: ActiveTab) => {
-    const validChoices = [
-      "favorited",
-      "unfavorited",
-      "create dog",
-    ] as ActiveTab[];
-    if (validChoices.includes(tab)) {
-      this.props.setActiveTab(tab);
-    }
+    this.props.setActiveTab(tab);
+  };
+
+  Tab = ({
+    tab,
+    isActive,
+    handleTabClick,
+    favoritedCount,
+    unfavoritedCount,
+  }: {
+    tab: ActiveTab;
+    isActive: boolean;
+    handleTabClick: (input: ActiveTab) => void;
+    favoritedCount: number;
+    unfavoritedCount: number;
+  }) => {
+    const text = tab
+      .split("")
+      .map((c, i) => (i === 0 ? c.toUpperCase() : c.toLowerCase()))
+      .join("");
+
+    return (
+      <div
+        className={`selector ${isActive ? "active" : ""}`}
+        onClick={() => handleTabClick(tab as ActiveTab)}
+      >
+        {text}
+        {tab === "favorited" && `(${favoritedCount})`}
+        {tab === "unfavorited" && `(${unfavoritedCount})`}
+      </div>
+    );
   };
 
   render() {
-    const { activeTab, children, favoritedCount, unfavoritedCount, createDog } =
+    const { activeTab, children, favoritedCount, unfavoritedCount } =
       this.props;
 
     return (
@@ -40,36 +61,22 @@ export class ClassSection extends Component<ClassSectionProps> {
             Change to Functional
           </Link>
           <div className="selectors">
-            {["favorited", "unfavorited", "create dog"].map((tab) => (
-              <div
-                key={tab}
-                className={`selector ${activeTab === tab ? "active" : ""}`}
-                onClick={() => this.handleTabClick(tab as ActiveTab)}
-              >
-                {tab === "favorited"
-                  ? "favorited"
-                  : tab === "unfavorited"
-                  ? "unfavorited"
-                  : "create dog"}{" "}
-                {tab === "favorited"
-                  ? favoritedCount
-                  : tab === "unfavorited"
-                  ? unfavoritedCount
-                  : ""}
-              </div>
-            ))}
+            {(["favorited", "unfavorited", "create dog"] as const).map(
+              (tab) => (
+                <this.Tab
+                  tab={tab}
+                  isActive={tab === activeTab}
+                  handleTabClick={this.handleTabClick}
+                  key={tab}
+                  favoritedCount={favoritedCount}
+                  unfavoritedCount={unfavoritedCount}
+                />
+              )
+            )}
           </div>
         </div>
         <div className="content-container">
-          <div>
-            <SectionLayout>
-              {activeTab === "create dog" ? (
-                <ClassCreateDogForm createDog={createDog} />
-              ) : (
-                children
-              )}
-            </SectionLayout>
-          </div>
+          <div>{children}</div>
         </div>
       </section>
     );

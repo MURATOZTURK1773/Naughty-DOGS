@@ -3,6 +3,7 @@ import { ActiveTab, Dog } from "../types";
 import { Requests } from "../api";
 import { ClassDogs } from "./ClassDogs";
 import { ClassSection } from "./ClassSection";
+import { ClassCreateDogForm } from "./ClassCreateDogForm";
 
 export interface ClassComponentState {
   allDogs: Dog[];
@@ -114,14 +115,19 @@ export class ClassApp extends Component<
           unfavoritedCount={unfavoritedDogsCount}
           createDog={this.createDog}
         >
-          <ClassDogs
-            dogs={filteredDogs}
-            updateDog={this.updateDog}
-            deleteDog={this.deleteDog}
-            onEmptyHeartClick={this.handleHeartClick}
-            onHeartClick={this.handleHeartClick}
-            isLoading={this.state.isLoading}
-          />
+          {activeTab !== "create dog" && (
+            <ClassDogs
+              dogs={filteredDogs}
+              updateDog={this.updateDog}
+              deleteDog={this.deleteDog}
+              onEmptyHeartClick={this.handleHeartClick}
+              onHeartClick={this.handleHeartClick}
+              isLoading={this.state.isLoading}
+            />
+          )}
+          {activeTab === "create dog" && (
+            <ClassCreateDogForm createDog={this.createDog} />
+          )}
         </ClassSection>
       </div>
     );
