@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Dog } from "../types";
 import { ActiveTab } from "../types";
 
 interface ClassSectionProps {
@@ -10,7 +9,6 @@ interface ClassSectionProps {
   isLoading: boolean;
   favoritedCount: number;
   unfavoritedCount: number;
-  createDog: (dog: Omit<Dog, "id">) => Promise<void>;
 }
 
 export class ClassSection extends Component<ClassSectionProps> {

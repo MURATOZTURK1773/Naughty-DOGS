@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ActiveTab, Dog } from "../types";
+import { ActiveTab } from "../types";
 import React from "react";
 
 interface FunctionalSectionProps {
@@ -10,7 +10,6 @@ interface FunctionalSectionProps {
   isLoading: boolean;
   favoritedCount: number;
   unfavoritedCount: number;
-  createDog: (dog: Omit<Dog, "id">) => Promise<void>;
 }
 
 const Tab = ({
@@ -65,6 +64,7 @@ export const FunctionalSection: React.FC<FunctionalSectionProps> = (
               isActive={tab === props.activeTab}
               handleTabClick={handleTabClick}
               tab={tab}
+              key={tab}
               favoritedCount={props.favoritedCount}
               unfavoritedCount={props.unfavoritedCount}
             />

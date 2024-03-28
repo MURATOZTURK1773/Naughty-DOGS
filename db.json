@@ -53,14 +53,14 @@
       "name": "Danyka",
       "image": "/assets/chihuahua.avif",
       "description": "chillax daily sally however lest",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 8
     },
     {
       "name": "Toby",
       "image": "/assets/blue-heeler.png",
       "description": "wildly forenenst rightfully till how",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 9
     },
     {

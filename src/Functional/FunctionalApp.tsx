@@ -29,19 +29,6 @@ export function FunctionalApp() {
       });
   };
 
-  const updateDog = (dog: Partial<Dog>) => {
-    setIsLoading(true);
-    return Requests.updateDog({
-      id: dog.id,
-      isFavorite: dog.isFavorite,
-    })
-      .then(() => refetchData())
-      .catch((error) => {
-        console.error("Error updating dog:", error);
-      })
-      .finally(() => setIsLoading(false));
-  };
-
   const handleHeartClick = (id: number, isFavorite: boolean) => {
     setIsLoading(true);
     return Requests.updateDog({
@@ -49,7 +36,7 @@ export function FunctionalApp() {
       isFavorite: isFavorite,
     })
       .then(() => {
-        refetchData();
+        return refetchData();
       })
       .finally(() => {
         setIsLoading(false);
@@ -85,12 +72,10 @@ export function FunctionalApp() {
         favoritedCount={favoritedDogsCount}
         unfavoritedCount={unfavoritedDogsCount}
         setActiveTab={setActiveTab}
-        createDog={createDog}
       >
         {activeTab !== "create dog" && (
           <FunctionalDogs
             dogs={filteredDogs}
-            updateDog={updateDog}
             deleteDog={deleteDog}
             onEmptyHeartClick={handleHeartClick}
             onHeartClick={handleHeartClick}

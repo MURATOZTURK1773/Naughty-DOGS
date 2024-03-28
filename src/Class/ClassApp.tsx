@@ -48,21 +48,6 @@ export class ClassApp extends Component<
       });
   };
 
-  updateDog = (dog: Partial<Dog>) => {
-    this.setState({ isLoading: true });
-    return Requests.updateDog({
-      id: dog.id,
-      isFavorite: dog.isFavorite,
-    })
-      .then(() => this.refetchData())
-      .catch((error) => {
-        console.error("Error updating dog:", error);
-      })
-      .finally(() => {
-        this.setState({ isLoading: false });
-      });
-  };
-
   handleHeartClick = (id: number, isFavorite: boolean) => {
     this.setState({ isLoading: true });
     return Requests.updateDog({
@@ -113,12 +98,10 @@ export class ClassApp extends Component<
           isLoading={this.state.isLoading}
           favoritedCount={favoritedDogsCount}
           unfavoritedCount={unfavoritedDogsCount}
-          createDog={this.createDog}
         >
           {activeTab !== "create dog" && (
             <ClassDogs
               dogs={filteredDogs}
-              updateDog={this.updateDog}
               deleteDog={this.deleteDog}
               onEmptyHeartClick={this.handleHeartClick}
               onHeartClick={this.handleHeartClick}
