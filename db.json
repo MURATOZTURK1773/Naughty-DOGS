@@ -4,7 +4,7 @@
       "name": "Nannie",
       "image": "/assets/corgi.png",
       "description": "inquisitively oof calm acupuncture whereas equatorial gosh effectuate",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 0
     },
     {
@@ -39,14 +39,14 @@
       "name": "Shannon",
       "image": "/assets/cowardly.png",
       "description": "invite insistent brr truthfully athwart bah straddle assassination",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 6
     },
     {
       "name": "Imani",
       "image": "/assets/dalmation.png",
       "description": "rattle excluding skean on recovery",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 7
     },
     {
@@ -60,7 +60,7 @@
       "name": "Toby",
       "image": "/assets/blue-heeler.png",
       "description": "wildly forenenst rightfully till how",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 9
     },
     {

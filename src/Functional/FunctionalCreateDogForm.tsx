@@ -19,6 +19,13 @@ export const FunctionalCreateDogForm = ({
     setSelectedImage(e.target.value);
   };
 
+  const reset = () => {
+    setName("");
+    setDescription("");
+    setSelectedImage(defaultSelectedImage);
+    setIsFormSubmitted(false);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsFormSubmitted(true);
@@ -31,10 +38,7 @@ export const FunctionalCreateDogForm = ({
     };
     createDog(newDog)
       .then(() => {
-        setName("");
-        setDescription("");
-        setSelectedImage(defaultSelectedImage);
-        setIsFormSubmitted(false);
+        reset();
         toast.success(`Created ${newDog.name} !!!`);
       })
       .catch((error) => {
